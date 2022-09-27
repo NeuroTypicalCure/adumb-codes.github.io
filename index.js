@@ -47,6 +47,8 @@ $(document).ready(() => {
 
     $('#restart-icon').popup();
     $('#restart-icon').click(resetText);
+    $('#theme-icon').popup();
+    $('#theme-icon').click(changeTheme);
 
     $('#10words').click(function() {
         testLength = 10;
@@ -143,6 +145,52 @@ function resetText() {
     // $('#text-content').html(textContent)
     let formatText = evaluateText()
     updateText(formatText)
+}
+
+function setCookie(cname, cvalue, exdays) { // stole from w3
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) { // also stole from w3
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
+function loadCSS(filename){
+    var fileref = document.createElement("link");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("type", "text/css");
+    fileref.setAttribute("href", filename);
+    fileref.setAttribute("id", "darkHeadLink");
+    document.getElementsByTagName("head")[0].appendChild(fileref);
+}
+
+if(getCookie('theme') == 'dark'){
+    loadCSS('indexDark.css');
+}
+
+function changeTheme(){
+    if(getCookie('theme') == 'dark'){
+        setCookie('theme', 'light', 7);
+        if($('#darkHeadLink')){$('#darkHeadLink').remove();}
+    }else{
+        setCookie('theme', 'dark', 7);
+        loadCSS('indexDark.css');
+    }
 }
 
 function setLayout(layout) {
