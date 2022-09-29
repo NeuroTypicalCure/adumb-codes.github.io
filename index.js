@@ -5,7 +5,7 @@ let maxSplitPoint = splitText.length-testLength;
 const rstlne = 'qagwsxdecfrvzl?;hbunjkimyo,pt. '
 const twof = 'jxmwsdrnlctbzgvqhyuafie,op.k;? '
 const onef = 'vgfcdnlatreoismhupwy.b,xkzjq;? '
-const java = 'lrxuaygijbshqc?zpkdnvmtwfe;.o,'
+const java = 'lrxuaygijbshqc?zpkdnvmtwfe;.o, '
 
 let curIndex = 0;
 let curLayout = rstlne;
