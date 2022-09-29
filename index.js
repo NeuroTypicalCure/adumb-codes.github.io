@@ -5,6 +5,7 @@ let maxSplitPoint = splitText.length-testLength;
 const rstlne = 'qagwsxdecfrvzl?;hbunjkimyo,pt. '
 const twof = 'jxmwsdrnlctbzgvqhyuafie,op.k;? '
 const onef = 'vgfcdnlatreoismhupwy.b,xkzjq;? '
+const java = 'lugbqzdmf.raiscpnteoxyjh?kvw;, '
 
 let curIndex = 0;
 let curLayout = rstlne;
@@ -32,6 +33,10 @@ $(document).ready(() => {
                 {
                     name     : '1 Finger',
                     value    : '1finger',
+                },
+                {
+                    name     : 'Java',
+                    value    : 'java',
                 }
             ],
             onChange: function(value, text, $selectedItem) {
@@ -41,6 +46,8 @@ $(document).ready(() => {
                     setLayout(twof);
                 } else if (value === '1finger') {
                     setLayout(onef)
+                } else if (value === 'java') {
+                    setLayout(java)
                 }
             }
     });
