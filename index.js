@@ -101,6 +101,7 @@ $(document).ready(() => {
 })
 
 $(document).keydown(event => {
+    event.preventDefault();
     if (!ready) return;
     if (!keyMapping[event.which]) return;
     if (keyMapping[event.which].pressed == true) return;
@@ -111,7 +112,6 @@ $(document).keydown(event => {
             typedText = typedText.substring(0, typedText.length-1)
         }
     } else if (event.which == 32) {
-        event.preventDefault();
         if (typedText.length > 0) {
             typedText += curLayout[keyMapping[event.which].index]
         }
