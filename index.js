@@ -5,6 +5,7 @@ let maxSplitPoint = splitText.length-testLength;
 const rstlne = 'qagwsxdecfrvzl?;hbunjkimyo,pt. '
 const twof = 'jxmwsdrnlctbzgvqhyuafie,op.k;? '
 const onef = 'vgfcdnlatreoismhupwy.b,xkzjq;? '
+const qwerty = 'qazwsxedcrfvtgbyhnujmik,ol.p;/ '
 
 let curIndex = 0;
 let curLayout = rstlne;
@@ -32,15 +33,21 @@ $(document).ready(() => {
                 {
                     name     : '1 Finger',
                     value    : '1finger',
-                }
+                },
+                {
+                    name     : 'Qwerty',
+                    value    : 'qwerty',
+                },
             ],
             onChange: function(value, text, $selectedItem) {
                 if (value === 'rstlne') {
-                    setLayout(rstlne)
+                    setLayout(rstlne);
                 } else if (value === '2finger') {
                     setLayout(twof);
                 } else if (value === '1finger') {
-                    setLayout(onef)
+                    setLayout(onef);
+                } else if (value === 'qwerty') {
+                    setLayout(qwerty);
                 }
             }
     });
