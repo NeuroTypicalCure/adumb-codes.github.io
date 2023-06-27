@@ -112,7 +112,11 @@ var keyMapping = {
         pressed: false
     },
     186: {
-        index: 28,
+        index: 28, //semicolon
+        pressed: false
+    },
+    59: {
+        index: 28, //semicolon on firefox
         pressed: false
     },
     191: {

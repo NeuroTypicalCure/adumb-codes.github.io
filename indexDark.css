@@ -1,0 +1,26 @@
+body {
+    background: #0f0f0f;
+}
+
+.compact.ui.button.key,.compact.ui.button.space,.compact.ui.button.delete, #layout-selector, #card-footer{
+    background: #424242;
+}
+
+#text-content, #card-footer{
+    outline: solid 1px #666666;
+}
+#info-message {
+    background: #0f0f0f;
+}
+
+#text-content {
+    background: #0f0f0f;
+    font-family: 'Courier New', Courier, monospace;
+}
+.typed-text {
+    color: #c7c7c7
+}
+
+.statistic div, strong{
+    color: #898989 !important;
+}

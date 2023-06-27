@@ -6,6 +6,7 @@ const rstlne = 'qagwsxdecfrvzl?;hbunjkimyo,pt. '
 const twof = 'jxmwsdrnlctbzgvqhyuafie,op.k;? '
 const onef = 'vgfcdnlatreoismhupwy.b,xkzjq;? '
 const java = 'lrxuaygijbshqc?zpkdnvmtwfe;.o, '
+const qwerty = 'qazwsxedcrfvtgbyhnujmik,ol.p;/ '
 
 let curIndex = 0;
 let curLayout = rstlne;
@@ -37,23 +38,31 @@ $(document).ready(() => {
                 {
                     name     : 'Java',
                     value    : 'java',
-                }
+                },
+                {
+                    name     : 'Qwerty',
+                    value    : 'qwerty',
+                },
             ],
             onChange: function(value, text, $selectedItem) {
                 if (value === 'rstlne') {
-                    setLayout(rstlne)
+                    setLayout(rstlne);
                 } else if (value === '2finger') {
                     setLayout(twof);
                 } else if (value === '1finger') {
-                    setLayout(onef)
+                    setLayout(onef);
                 } else if (value === 'java') {
-                    setLayout(java)
+                    setLayout(java);
+                } else if (value === 'qwerty') {
+                    setLayout(qwerty);
                 }
             }
     });
 
     $('#restart-icon').popup();
     $('#restart-icon').click(resetText);
+    $('#theme-icon').popup();
+    $('#theme-icon').click(changeTheme);
 
     $('#10words').click(function() {
         testLength = 10;
@@ -106,6 +115,7 @@ $(document).ready(() => {
 })
 
 $(document).keydown(event => {
+    event.preventDefault();
     if (!ready) return;
     if (!keyMapping[event.which]) return;
     if (keyMapping[event.which].pressed == true) return;
@@ -116,7 +126,6 @@ $(document).keydown(event => {
             typedText = typedText.substring(0, typedText.length-1)
         }
     } else if (event.which == 32) {
-        event.preventDefault();
         if (typedText.length > 0) {
             typedText += curLayout[keyMapping[event.which].index]
         }
@@ -150,6 +159,52 @@ function resetText() {
     // $('#text-content').html(textContent)
     let formatText = evaluateText()
     updateText(formatText)
+}
+
+function setCookie(cname, cvalue, exdays) { // stole from w3
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) { // also stole from w3
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
+function loadCSS(filename){
+    var fileref = document.createElement("link");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("type", "text/css");
+    fileref.setAttribute("href", filename);
+    fileref.setAttribute("id", "darkHeadLink");
+    document.getElementsByTagName("head")[0].appendChild(fileref);
+}
+
+if(getCookie('theme') == 'dark'){
+    loadCSS('indexDark.css');
+}
+
+function changeTheme(){
+    if(getCookie('theme') == 'dark'){
+        setCookie('theme', 'light', 7);
+        if($('#darkHeadLink')){$('#darkHeadLink').remove();}
+    }else{
+        setCookie('theme', 'dark', 7);
+        loadCSS('indexDark.css');
+    }
 }
 
 function setLayout(layout) {
